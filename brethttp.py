@@ -1,8 +1,8 @@
 from httplib2 import Http
-from json import dumps
+from json import dumps, load
 from datetime import datetime
 
-confData = json.load(open('button.conf'))
+confData = load(open('button.conf'))
 appkey = confData["APPKEY"]
 url = "https://www.wasbretontime.com/api/" + appkey + "/addtime"
 
