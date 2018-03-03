@@ -3,7 +3,7 @@ from brethttp import send
 from datetime import datetime
 import time, threading
 
-def addTime():
+def addNewTime():
     addTime(datetime.now())
 
 def startLoop():

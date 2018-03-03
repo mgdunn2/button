@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 import time
-from bretpi import addTime, startLoop
+from bretpi import addNewTime, startLoop
 
 BtnPin = 12    # pin12 --- button
 
@@ -10,7 +10,7 @@ def setup():
     GPIO.setup(BtnPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    # Set BtnPin's mode is input, and pull up to high level(3.3V)
 
 def swLed(ev=None):
-    addTime()
+    addNewTime()
     print "button!"
 
 def loop():
