@@ -3,4 +3,6 @@
 *.conf
 *.sqlite
 
+nohup.out
+
 bretenv/
