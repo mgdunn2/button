@@ -2,29 +2,12 @@ import os
 import sys
 import sqlite3
 import json
+from db.db import transaction
 
 confData = json.load(open('button.conf'))
 sql_file = confData["sql_file"]
 
-def transaction(func):
-    def new_func(*args, **kwargs):
-        connection = sqlite3.connect(sql_file, detect_types=sqlite3.PARSE_DECLTYPES)
-        cursor = connection.cursor()
-        try:
-            retval = func(cursor, *args, **kwargs)
-            connection.commit()
-        except:
-            connection.rollback()
-            raise
-        finally:
-            cursor.close()
-            connection.close()
-        return retval
-    new_func.__name__ = func.__name__
-    new_func.__doc__ = func.__doc__
-    return new_func
-
-@transaction
+@transaction(sql_file)
 def addTime(cursor, datetime):
     cursor.execute('SELECT max(`id`) from `checkins`;')
     results = cursor.fetchall()
@@ -34,7 +17,7 @@ def addTime(cursor, datetime):
         nextId = results[0][0] + 1
     cursor.execute('insert into `checkins` values(?, ?, ?)', (nextId, datetime, 0))
 
-@transaction
+@transaction(sql_file)
 def trySend(cursor, sendFunc):
     cursor.execute('SELECT `id`,`check_in_time` from `checkins` WHERE `delivered` = 0;')
     results = cursor.fetchall()
