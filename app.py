@@ -9,12 +9,12 @@ def setup():
     GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
     GPIO.setup(BtnPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    # Set BtnPin's mode is input, and pull up to high level(3.3V)
 
-def swLed(ev=None):
+def buttonCallback(ev=None):
     addNewTime()
     print "button!"
 
 def loop():
-    GPIO.add_event_detect(BtnPin, GPIO.FALLING, callback=swLed, bouncetime=350) # wait for falling and set bouncetime to prevent the callback function from being called multiple times when the button is pressed
+    GPIO.add_event_detect(BtnPin, GPIO.FALLING, callback=buttonCallback, bouncetime=350) # wait for falling and set bouncetime to prevent the callback function from being called multiple times when the button is pressed
     while True:
         time.sleep(1)   # Don't do anything
 
