@@ -41,13 +41,12 @@ def trySend(cursor, sendFunc):
     if results is None or len(results) == 0 or results[0][0] == None:
         return
     successes = []
-    failures = []
     for row in results:
         try:
             if sendFunc(row[1]):
                 successes.append(row[0])
         except:
-            failures.append(row[0])
+            pass
     for checkinId in successes:
         cursor.execute('UPDATE `checkins` SET `delivered` = 1 WHERE `id` = ?', (checkinId,))
     return successes
