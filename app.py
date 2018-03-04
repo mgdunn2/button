@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 import time
-from bretpi import addNewTime, startLoop
+from bretpi import addNewTime, startSendLoop
 
 BtnPin = 12
 
@@ -24,7 +24,7 @@ def destroy():
 if __name__ == '__main__':
     setup()
     try:
-        startLoop()
+        startSendLoop()
         loop()
     except KeyboardInterrupt:
         destroy()

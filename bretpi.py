@@ -6,9 +6,9 @@ import time, threading
 def addNewTime():
     addTime(datetime.now())
 
-def startLoop():
-    threading.Timer(1, loop).start()
+def startSendLoop():
+    threading.Timer(1, sendLoop).start()
 
-def loop():
+def sendLoop():
     trySend(send)
-    threading.Timer(10, loop).start()
+    threading.Timer(10, sendLoop).start()
