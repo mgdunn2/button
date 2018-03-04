@@ -6,25 +6,25 @@ from bretpi import addNewTime, startLoop
 BtnPin = 12    # pin12 --- button
 
 def setup():
-    GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
-    GPIO.setup(BtnPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)    # Set BtnPin's mode is input, and pull up to high level(3.3V)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(BtnPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def buttonCallback(ev=None):
     addNewTime()
     print "button!"
 
 def loop():
-    GPIO.add_event_detect(BtnPin, GPIO.FALLING, callback=buttonCallback, bouncetime=350) # wait for falling and set bouncetime to prevent the callback function from being called multiple times when the button is pressed
+    GPIO.add_event_detect(BtnPin, GPIO.FALLING, callback=buttonCallback, bouncetime=350)
     while True:
-        time.sleep(1)   # Don't do anything
+        time.sleep(1)
 
 def destroy():
-    GPIO.cleanup()                     # Release resource
+    GPIO.cleanup()
 
-if __name__ == '__main__':     # Program start from here
+if __name__ == '__main__':
     setup()
     try:
         startLoop()
         loop()
-    except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
+    except KeyboardInterrupt:
         destroy()
