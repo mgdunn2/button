@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import time
 from bretpi import addNewTime, startLoop
 
-BtnPin = 12    # pin12 --- button
+BtnPin = 12
 
 def setup():
     GPIO.setmode(GPIO.BOARD)
