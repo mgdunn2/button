@@ -10,6 +10,9 @@ def setup():
     GPIO.setup(BtnPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 def buttonCallback(ev=None):
+    time.sleep(0.08)
+    if GPIO.input(BtnPin) != GPIO.LOW:
+        return
     addNewTime()
     print "button!"
 
